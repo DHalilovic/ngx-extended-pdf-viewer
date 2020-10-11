@@ -99,6 +99,13 @@ export class NgxExtendedPdfViewerService {
     }
   }
 
+  rrFind(query: any, options: any) {
+    const PDFViewerApplication: IPDFViewerApplication = (window as any).PDFViewerApplication;
+    options.query = query;
+    // Trigger webViewerFind() in app.js of PDF.js
+    PDFViewerApplication.eventBus.dispatch("find", options);
+  }
+  
   public findNext(): boolean {
     if (!NgxExtendedPdfViewerComponent.ngxExtendedPdfViewerInitialized) {
       // tslint:disable-next-line:quotemark
