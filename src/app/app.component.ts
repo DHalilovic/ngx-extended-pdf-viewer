@@ -129,6 +129,38 @@ export class AppComponent implements OnInit {
     return undefined;
   }
 
+  public rrSearchText(text: string): void {
+    // Comma-separate search text into terms
+    const entries : string[] = text.split(',');
+    // Format query array
+    const query : any[] = [];
+    // Add individual terms
+    for (let i = 0, len = entries.length; i < len; i++ ) {
+      query.push({
+        entry: entries[i], 
+        color: `#` + Math.floor(Math.random() * 16777215).toString(16)
+      });
+    }
+
+    // Format options
+    const options : any = {
+      query,
+      type: '',
+      caseSensitive: false,
+      entireWord: false,
+      findPrevious: undefined,
+      fuzzySearch: false,
+      highlightAll: false,
+      ignoreAccents: false,
+      phraseSearch: true
+    };
+
+    console.log(JSON.stringify(options));
+
+    // Find terms in pdf
+    this.ngxExtendedPdfViewerService.rrFind(options);
+  }
+  
   public activateTab(tab: number): void {
     this.hideOtherPDFs();
     this.ignoreKeyboard = this.ignoreKeyboard || tab === 0;

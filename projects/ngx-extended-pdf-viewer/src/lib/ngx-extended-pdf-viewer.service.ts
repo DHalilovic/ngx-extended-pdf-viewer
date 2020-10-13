@@ -99,9 +99,8 @@ export class NgxExtendedPdfViewerService {
     }
   }
 
-  rrFind(query: any, options: any) {
+  public rrFind(options: any): void {
     const PDFViewerApplication: IPDFViewerApplication = (window as any).PDFViewerApplication;
-    options.query = query;
     // Trigger webViewerFind() in app.js of PDF.js
     PDFViewerApplication.eventBus.dispatch("find", options);
   }

@@ -171,8 +171,14 @@
       <div class="margin">resulting zoom factor: {{ zoom }}<br />zoom factor reported from the viewer: {{ currentZoomFactor }}</div>
     </section>
     <section class="section">
+      <!--
       <mat-form-field class="margin">
         <input matInput class="margin" [(ngModel)]="searchtext" placeholder="find (programmatically)" />
+      </mat-form-field>
+      -->
+      <mat-form-field class="margin">
+        <input #findInput matInput class="margin" (blur)="rrSearchText(findInput.value)" 
+        placeholder="find (programmatically)" />
       </mat-form-field>
       <button (click)="findNext()">next</button>
       <button (click)="findPrevious()">previous</button>
