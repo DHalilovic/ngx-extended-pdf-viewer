@@ -419,6 +419,9 @@ export class NgxExtendedPdfViewerComponent implements OnInit, AfterViewInit, OnC
   @Output()
   public updateFindState = new EventEmitter<FindState>();
 
+  @Output()
+  public updateWatchlistResults = new EventEmitter<any>();
+
   /** Legal values: undefined, 'auto', 'page-actual', 'page_fit', 'page-width', or '50' (or any other percentage) */
   @Input()
   public zoom: string | number | undefined = undefined;
@@ -1088,7 +1091,8 @@ export class NgxExtendedPdfViewerComponent implements OnInit, AfterViewInit, OnC
     });
 
     PDFViewerApplication.eventBus.on('updatewatchlistresults', (x: any) => {
-      console.log(x.results);
+      x.src = this._src; // Add current source document
+      this.updateWatchlistResults.emit(x);
     });
 
     this.checkHeight();
