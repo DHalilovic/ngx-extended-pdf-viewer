@@ -1087,6 +1087,10 @@ export class NgxExtendedPdfViewerComponent implements OnInit, AfterViewInit, OnC
       });
     });
 
+    PDFViewerApplication.eventBus.on('updatewatchlistresults', (x: any) => {
+      console.log(x.results);
+    });
+
     this.checkHeight();
     // open a file in the viewer
     if (!!this._src) {
