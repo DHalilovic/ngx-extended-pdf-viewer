@@ -422,6 +422,9 @@ export class NgxExtendedPdfViewerComponent implements OnInit, AfterViewInit, OnC
   @Output()
   public updateWatchlistResults = new EventEmitter<any>();
 
+  @Output()
+  public updateContextResults = new EventEmitter<any>();
+
   /** Legal values: undefined, 'auto', 'page-actual', 'page_fit', 'page-width', or '50' (or any other percentage) */
   @Input()
   public zoom: string | number | undefined = undefined;
@@ -1090,9 +1093,14 @@ export class NgxExtendedPdfViewerComponent implements OnInit, AfterViewInit, OnC
       });
     });
 
+    // #RR "find" results
     PDFViewerApplication.eventBus.on('updatewatchlistresults', (x: any) => {
-      x.src = this._src; // Add current source document
       this.updateWatchlistResults.emit(x);
+    });
+
+    // #RR "findcontexts" results
+    PDFViewerApplication.eventBus.on('updatecontextresults', (x: any) => {
+      this.updateContextResults.emit(x);
     });
 
     this.checkHeight();
